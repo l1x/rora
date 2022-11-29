@@ -1,0 +1,24 @@
+[package]
+edition = "2021"
+name = "rora"
+version = "0.1.0"
+
+[dependencies]
+chrono = "0.4.23"
+lambda_http = {version = "0.7.1", optional = true}
+lambda_runtime = {version = "0.7.1", optional = true}
+parquet = "28.0.0"
+serde = "1.0.145"
+tokio = {version = "1", features = ["macros"]}
+tracing = {version = "0.1", features = ["log"]}
+tracing-subscriber = {version = "0.3", default-features = false, features = ["fmt"]}
+
+[features]
+default = ["lambda"]
+lambda = ["lambda_runtime", "lambda_http"]
+
+[[bin]]
+name = "rora"
+path = "src/bin/lambda/rora.rs"
+required-features = ["lambda"]
+test = false
